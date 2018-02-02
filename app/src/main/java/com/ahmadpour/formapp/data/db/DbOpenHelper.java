@@ -2,9 +2,12 @@ package com.ahmadpour.formapp.data.db;
 
 import android.content.Context;
 
+import com.ahmadpour.formapp.data.db.models.DaoMaster;
 import com.ahmadpour.formapp.di.ApplicationContext;
 import com.ahmadpour.formapp.di.DatabaseInfo;
 import com.ahmadpour.formapp.utils.AppLogger;
+
+import org.greenrobot.greendao.database.Database;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

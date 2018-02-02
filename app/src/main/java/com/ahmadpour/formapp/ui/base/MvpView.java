@@ -1,4 +1,4 @@
-package com.ahmadpour.formapp.ui;
+package com.ahmadpour.formapp.ui.base;
 
 import android.support.annotation.StringRes;
 

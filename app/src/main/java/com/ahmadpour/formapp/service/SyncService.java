@@ -6,8 +6,13 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.ahmadpour.formapp.FormApp;
+import com.ahmadpour.formapp.data.DataManager;
+import com.ahmadpour.formapp.di.component.DaggerServiceComponent;
 import com.ahmadpour.formapp.di.component.ServiceComponent;
 import com.ahmadpour.formapp.utils.AppLogger;
+
+import javax.inject.Inject;
 
 /**
  * Created by behrooz on 1/29/18.
@@ -15,10 +20,10 @@ import com.ahmadpour.formapp.utils.AppLogger;
 
 public class SyncService extends Service {
 
-    private static final String TAG = "SyncService";
+    private static final String TAG = SyncService.class.getSimpleName();
 
-//    @Inject
-//    DataManager mDataManager;
+    @Inject
+    DataManager mDataManager;
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, SyncService.class);
@@ -36,10 +41,10 @@ public class SyncService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-//        ServiceComponent component = DaggerServiceComponent.builder()
-//                .applicationComponent(((MvpApp) getApplication()).getComponent())
-//                .build();
-//        component.inject(this);
+        ServiceComponent component = DaggerServiceComponent.builder()
+                .applicationComponent(((FormApp) getApplication()).getComponent())
+                .build();
+        component.inject(this);
     }
 
     @Override

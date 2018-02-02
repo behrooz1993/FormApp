@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FormApp.iml" filepath="$PROJECT_DIR$/FormApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/darabaseGenerator/darabaseGenerator.iml" filepath="$PROJECT_DIR$/darabaseGenerator/darabaseGenerator.iml" />
     </modules>
   </component>
 </project>

@@ -3,6 +3,8 @@ package com.ahmadpour.formapp.di.component;
 import android.app.Application;
 import android.content.Context;
 
+import com.ahmadpour.formapp.FormApp;
+import com.ahmadpour.formapp.data.DataManager;
 import com.ahmadpour.formapp.di.ApplicationContext;
 import com.ahmadpour.formapp.di.module.ApplicationModule;
 import com.ahmadpour.formapp.service.SyncService;
@@ -19,8 +21,8 @@ import dagger.Component;
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
 
-//    void inject(MvpApp app);
-//
+    void inject(FormApp app);
+
     void inject(SyncService service);
 
     @ApplicationContext
@@ -28,5 +30,5 @@ public interface ApplicationComponent {
 
     Application application();
 
-//    DataManager getDataManager();
+    DataManager getDataManager();
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ahmadpour.formapp.ui.main.MainActivity">
+
+
+    <Button
+        android:id="@+id/btn_form_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"/>
+
+    <Button
+        android:id="@+id/btn_answer_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="@+id/btn_form_list"
+        app:layout_constraintStart_toStartOf="@+id/btn_form_list"
+        app:layout_constraintTop_toBottomOf="@+id/btn_form_list" />
+
+
+</android.support.constraint.ConstraintLayout>

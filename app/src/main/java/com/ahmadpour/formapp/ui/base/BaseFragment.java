@@ -1,4 +1,4 @@
-package com.ahmadpour.formapp.ui;
+package com.ahmadpour.formapp.ui.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,6 +8,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.ahmadpour.formapp.di.component.ActivityComponent;
 import com.ahmadpour.formapp.utils.CommonUtils;
 
 import butterknife.Unbinder;

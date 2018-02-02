@@ -5,6 +5,12 @@ import android.content.Context;
 
 import com.ahmadpour.formapp.BuildConfig;
 import com.ahmadpour.formapp.R;
+import com.ahmadpour.formapp.data.AppDataManager;
+import com.ahmadpour.formapp.data.DataManager;
+import com.ahmadpour.formapp.data.db.AppDbHelper;
+import com.ahmadpour.formapp.data.db.DbHelper;
+import com.ahmadpour.formapp.data.prefs.AppPreferencesHelper;
+import com.ahmadpour.formapp.data.prefs.PreferencesHelper;
 import com.ahmadpour.formapp.di.ApiInfo;
 import com.ahmadpour.formapp.di.ApplicationContext;
 import com.ahmadpour.formapp.di.DatabaseInfo;
@@ -15,6 +21,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by behrooz on 1/29/18.
@@ -58,23 +65,23 @@ public class ApplicationModule {
         return AppConstants.PREF_NAME;
     }
 
-//    @Provides
-//    @Singleton
-//    DataManager provideDataManager(AppDataManager appDataManager) {
-//        return appDataManager;
-//    }
+    @Provides
+    @Singleton
+    DataManager provideDataManager(AppDataManager appDataManager) {
+        return appDataManager;
+    }
 //
-//    @Provides
-//    @Singleton
-//    DbHelper provideDbHelper(AppDbHelper appDbHelper) {
-//        return appDbHelper;
-//    }
+    @Provides
+    @Singleton
+    DbHelper provideDbHelper(AppDbHelper appDbHelper) {
+        return appDbHelper;
+    }
 //
-//    @Provides
-//    @Singleton
-//    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
-//        return appPreferencesHelper;
-//    }
+    @Provides
+    @Singleton
+    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
+        return appPreferencesHelper;
+    }
 //
 //    @Provides
 //    @Singleton
@@ -92,12 +99,12 @@ public class ApplicationModule {
 //                preferencesHelper.getAccessToken());
 //    }
 //
-//    @Provides
-//    @Singleton
-//    CalligraphyConfig provideCalligraphyDefaultConfig() {
-//        return new CalligraphyConfig.Builder()
-//                .setDefaultFontPath("fonts/source-sans-pro/SourceSansPro-Regular.ttf")
-//                .setFontAttrId(R.attr.fontPath)
-//                .build();
-//    }
+    @Provides
+    @Singleton
+    CalligraphyConfig provideCalligraphyDefaultConfig() {
+        return new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/source-sans-pro/SourceSansPro-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build();
+    }
 }

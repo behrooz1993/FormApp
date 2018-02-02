@@ -1,4 +1,4 @@
-package com.ahmadpour.formapp.ui;
+package com.ahmadpour.formapp.ui.base;
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
@@ -15,11 +15,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ahmadpour.formapp.FormApp;
 import com.ahmadpour.formapp.R;
+import com.ahmadpour.formapp.di.component.ActivityComponent;
+import com.ahmadpour.formapp.di.component.DaggerActivityComponent;
+import com.ahmadpour.formapp.di.module.ActivityModule;
 import com.ahmadpour.formapp.utils.CommonUtils;
 import com.ahmadpour.formapp.utils.NetworkUtils;
 
 import butterknife.Unbinder;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by behrooz on 1/29/18.
@@ -38,7 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         super.onCreate(savedInstanceState);
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
-                .applicationComponent(((MvpApp) getApplication()).getComponent())
+                .applicationComponent(((FormApp) getApplication()).getComponent())
                 .build();
 
     }
@@ -79,13 +84,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     }
 
     private void showSnackBar(String message) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                message, Snackbar.LENGTH_SHORT);
-        View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView
-                .findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
-        snackbar.show();
     }
 
     @Override
@@ -142,8 +140,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     @Override
     public void openActivityOnTokenExpire() {
-        startActivity(LoginActivity.getStartIntent(this));
-        finish();
+//        startActivity(LoginActivity.getStartIntent(this));
+//        finish();
     }
 
     public void setUnBinder(Unbinder unBinder) {

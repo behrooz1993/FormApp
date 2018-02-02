@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.ahmadpour.formapp.di.ActivityContext;
+import com.ahmadpour.formapp.di.PerActivity;
+import com.ahmadpour.formapp.ui.main.MainMvpPresenter;
+import com.ahmadpour.formapp.ui.main.MainMvpView;
+import com.ahmadpour.formapp.ui.main.MainPresenter;
 import com.ahmadpour.formapp.utils.rx.AppSchedulerProvider;
 import com.ahmadpour.formapp.utils.rx.SchedulerProvider;
 
@@ -46,71 +50,12 @@ public class ActivityModule {
         return new AppSchedulerProvider();
     }
 
-//        @Provides
-//        @PerActivity
-//        SplashMvpPresenter<SplashMvpView> provideSplashPresenter(
-//                SplashPresenter<SplashMvpView> presenter) {
-//            return presenter;
-//        }
-//
-//        @Provides
-//        AboutMvpPresenter<AboutMvpView> provideAboutPresenter(
-//                AboutPresenter<AboutMvpView> presenter) {
-//            return presenter;
-//        }
-//
-//        @Provides
-//        @PerActivity
-//        LoginMvpPresenter<LoginMvpView> provideLoginPresenter(
-//                LoginPresenter<LoginMvpView> presenter) {
-//            return presenter;
-//        }
-//
-//        @Provides
-//        @PerActivity
-//        MainMvpPresenter<MainMvpView> provideMainPresenter(
-//                MainPresenter<MainMvpView> presenter) {
-//            return presenter;
-//        }
-//
-//        @Provides
-//        RatingDialogMvpPresenter<RatingDialogMvpView> provideRateUsPresenter(
-//                RatingDialogPresenter<RatingDialogMvpView> presenter) {
-//            return presenter;
-//        }
-//
-//        @Provides
-//        FeedMvpPresenter<FeedMvpView> provideFeedPresenter(
-//                FeedPresenter<FeedMvpView> presenter) {
-//            return presenter;
-//        }
-//
-//        @Provides
-//        OpenSourceMvpPresenter<OpenSourceMvpView> provideOpenSourcePresenter(
-//                OpenSourcePresenter<OpenSourceMvpView> presenter) {
-//            return presenter;
-//        }
-//
-//        @Provides
-//        BlogMvpPresenter<BlogMvpView> provideBlogMvpPresenter(
-//                BlogPresenter<BlogMvpView> presenter) {
-//            return presenter;
-//        }
-//
-//        @Provides
-//        FeedPagerAdapter provideFeedPagerAdapter(AppCompatActivity activity) {
-//            return new FeedPagerAdapter(activity.getSupportFragmentManager());
-//        }
-//
-//        @Provides
-//        OpenSourceAdapter provideOpenSourceAdapter() {
-//            return new OpenSourceAdapter(new ArrayList<OpenSourceResponse.Repo>());
-//        }
-//
-//        @Provides
-//        BlogAdapter provideBlogAdapter() {
-//            return new BlogAdapter(new ArrayList<BlogResponse.Blog>());
-//        }
+    @Provides
+    @PerActivity
+    MainMvpPresenter<MainMvpView> providesMainPresenter(
+            MainPresenter<MainMvpView> presenter) {
+        return presenter;
+    }
 
     @Provides
     LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {
