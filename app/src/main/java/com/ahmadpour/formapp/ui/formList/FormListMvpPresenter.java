@@ -10,6 +10,7 @@ import com.ahmadpour.formapp.ui.base.MvpPresenter;
 @PerActivity
 public interface FormListMvpPresenter<V extends FormListMvpView> extends MvpPresenter<V>{
 
+    void fetchForms();
     void onListItemClicked(int position);
 
 }

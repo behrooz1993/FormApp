@@ -2,6 +2,7 @@ package com.ahmadpour.formapp.di.component;
 
 import com.ahmadpour.formapp.di.PerActivity;
 import com.ahmadpour.formapp.di.module.ActivityModule;
+import com.ahmadpour.formapp.ui.formList.FormListActivity;
 import com.ahmadpour.formapp.ui.main.MainActivity;
 
 import dagger.Component;
@@ -15,5 +16,6 @@ import dagger.Component;
 public interface ActivityComponent {
 
     void inject(MainActivity activity);
+    void inject(FormListActivity activity);
 
 }
