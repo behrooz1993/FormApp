@@ -22,4 +22,8 @@ public class FormPresenter<V extends FormMvpView> extends BasePresenter<V> imple
         super(dataManager, schedulerProvider, compositeDisposable);
     }
 
+    @Override
+    public void fetchQuestions(long formId) {
+
+    }
 }

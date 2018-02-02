@@ -1,5 +1,7 @@
 package com.ahmadpour.formapp.utils;
 
+import android.os.Environment;
+
 /**
  * Created by behrooz on 1/29/18.
  */
@@ -13,8 +15,10 @@ public final class AppConstants {
 
     public static final int API_STATUS_CODE_LOCAL_ERROR = 0;
 
-    public static final String DB_NAME = "mindorks_mvp.db";
-    public static final String PREF_NAME = "mindorks_pref";
+    public static final String DB_NAME = "formApp.db";
+    public static final String DB_PATH = Environment.getExternalStorageDirectory() +
+            "/data/data/com.ahmadpour.formapp/";
+    public static final String PREF_NAME = "formAppPref";
 
     public static final long NULL_INDEX = -1L;
 

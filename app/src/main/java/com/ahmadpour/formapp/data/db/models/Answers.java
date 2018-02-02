@@ -13,8 +13,8 @@ public class Answers {
     @Id
     private Long id;
     private Long questionId;
-    private Long optionId;
-    private String answer;
+    private Long optionId = 0l;
+    private String answer = "0";
 
     @Generated
     public Answers() {

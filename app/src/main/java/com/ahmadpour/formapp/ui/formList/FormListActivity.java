@@ -41,6 +41,7 @@ public class FormListActivity extends BaseActivity implements FormListMvpView {
         mPresenter.onAttach(FormListActivity.this);
 
         setUp();
+        mPresenter.fetchForms();
     }
 
     @Override

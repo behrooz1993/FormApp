@@ -40,7 +40,7 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return 0;
+        return lstForms.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

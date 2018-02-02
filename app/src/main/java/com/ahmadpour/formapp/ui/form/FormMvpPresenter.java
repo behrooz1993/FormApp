@@ -8,4 +8,7 @@ import com.ahmadpour.formapp.ui.base.MvpView;
  */
 
 public interface FormMvpPresenter<V extends FormMvpView> extends MvpPresenter<V> {
+
+    void fetchQuestions(long formId);
+
 }

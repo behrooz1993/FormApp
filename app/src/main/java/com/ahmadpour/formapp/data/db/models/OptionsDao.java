@@ -23,9 +23,9 @@ public class OptionsDao extends AbstractDao<Options, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID");
-        public final static Property QuestionId = new Property(1, Long.class, "questionId", false, "QUESTION_ID");
-        public final static Property Option = new Property(2, String.class, "option", false, "OPTION");
-        public final static Property IsAnswer = new Property(3, Boolean.class, "isAnswer", false, "IS_ANSWER");
+        public final static Property FormId = new Property(1, Long.class, "formId", false, "FORM_ID");
+        public final static Property QuestionId = new Property(2, Long.class, "questionId", false, "QUESTION_ID");
+        public final static Property Option = new Property(3, String.class, "option", false, "OPTION");
     }
 
 
@@ -42,9 +42,9 @@ public class OptionsDao extends AbstractDao<Options, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"OPTIONS\" (" + //
                 "\"ID\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"QUESTION_ID\" INTEGER," + // 1: questionId
-                "\"OPTION\" TEXT," + // 2: option
-                "\"IS_ANSWER\" INTEGER);"); // 3: isAnswer
+                "\"FORM_ID\" INTEGER," + // 1: formId
+                "\"QUESTION_ID\" INTEGER," + // 2: questionId
+                "\"OPTION\" TEXT);"); // 3: option
     }
 
     /** Drops the underlying database table. */
@@ -62,19 +62,19 @@ public class OptionsDao extends AbstractDao<Options, Long> {
             stmt.bindLong(1, id);
         }
  
+        Long formId = entity.getFormId();
+        if (formId != null) {
+            stmt.bindLong(2, formId);
+        }
+ 
         Long questionId = entity.getQuestionId();
         if (questionId != null) {
-            stmt.bindLong(2, questionId);
+            stmt.bindLong(3, questionId);
         }
  
         String option = entity.getOption();
         if (option != null) {
-            stmt.bindString(3, option);
-        }
- 
-        Boolean isAnswer = entity.getIsAnswer();
-        if (isAnswer != null) {
-            stmt.bindLong(4, isAnswer ? 1L: 0L);
+            stmt.bindString(4, option);
         }
     }
 
@@ -87,19 +87,19 @@ public class OptionsDao extends AbstractDao<Options, Long> {
             stmt.bindLong(1, id);
         }
  
+        Long formId = entity.getFormId();
+        if (formId != null) {
+            stmt.bindLong(2, formId);
+        }
+ 
         Long questionId = entity.getQuestionId();
         if (questionId != null) {
-            stmt.bindLong(2, questionId);
+            stmt.bindLong(3, questionId);
         }
  
         String option = entity.getOption();
         if (option != null) {
-            stmt.bindString(3, option);
-        }
- 
-        Boolean isAnswer = entity.getIsAnswer();
-        if (isAnswer != null) {
-            stmt.bindLong(4, isAnswer ? 1L: 0L);
+            stmt.bindString(4, option);
         }
     }
 
@@ -112,9 +112,9 @@ public class OptionsDao extends AbstractDao<Options, Long> {
     public Options readEntity(Cursor cursor, int offset) {
         Options entity = new Options( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // questionId
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // option
-            cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0 // isAnswer
+            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // formId
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // questionId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // option
         );
         return entity;
     }
@@ -122,9 +122,9 @@ public class OptionsDao extends AbstractDao<Options, Long> {
     @Override
     public void readEntity(Cursor cursor, Options entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setQuestionId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setOption(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setIsAnswer(cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0);
+        entity.setFormId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
+        entity.setQuestionId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setOption(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

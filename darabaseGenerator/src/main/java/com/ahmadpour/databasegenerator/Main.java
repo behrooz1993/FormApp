@@ -22,9 +22,9 @@ public class Main {
 
         Entity option = mSchema.addEntity("Options");
         option.addLongProperty("id").primaryKey();
+        option.addLongProperty("formId");
         option.addLongProperty("questionId");
         option.addStringProperty("option");
-        option.addBooleanProperty("isAnswer");
 
         Entity answer = mSchema.addEntity("Answers");
         answer.addLongProperty("id").primaryKey();

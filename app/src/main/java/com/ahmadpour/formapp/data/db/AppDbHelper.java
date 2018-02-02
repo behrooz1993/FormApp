@@ -6,6 +6,7 @@ import com.ahmadpour.formapp.data.db.models.DaoSession;
 import com.ahmadpour.formapp.data.db.models.Forms;
 import com.ahmadpour.formapp.data.db.models.Questions;
 import com.ahmadpour.formapp.data.db.models.QuestionsDao;
+import com.ahmadpour.formapp.utils.AppConstants;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -24,7 +25,7 @@ public class AppDbHelper implements DbHelper{
 
     @Inject
     public AppDbHelper(DbOpenHelper dbOpenHelper) {
-        mDaoSession = new DaoMaster(dbOpenHelper.getWritableDb()).newSession();
+        mDaoSession = new DaoMaster(dbOpenHelper.openDatabase()).newSession();
     }
 
     @Override

@@ -12,9 +12,9 @@ public class Options {
 
     @Id
     private Long id;
+    private Long formId;
     private Long questionId;
     private String option;
-    private Boolean isAnswer;
 
     @Generated
     public Options() {
@@ -25,11 +25,11 @@ public class Options {
     }
 
     @Generated
-    public Options(Long id, Long questionId, String option, Boolean isAnswer) {
+    public Options(Long id, Long formId, Long questionId, String option) {
         this.id = id;
+        this.formId = formId;
         this.questionId = questionId;
         this.option = option;
-        this.isAnswer = isAnswer;
     }
 
     public Long getId() {
@@ -38,6 +38,14 @@ public class Options {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getFormId() {
+        return formId;
+    }
+
+    public void setFormId(Long formId) {
+        this.formId = formId;
     }
 
     public Long getQuestionId() {
@@ -54,14 +62,6 @@ public class Options {
 
     public void setOption(String option) {
         this.option = option;
-    }
-
-    public Boolean getIsAnswer() {
-        return isAnswer;
-    }
-
-    public void setIsAnswer(Boolean isAnswer) {
-        this.isAnswer = isAnswer;
     }
 
 }
