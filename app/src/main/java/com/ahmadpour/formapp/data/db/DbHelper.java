@@ -5,6 +5,7 @@ import com.ahmadpour.formapp.data.db.models.Answers;
 import com.ahmadpour.formapp.data.db.models.Forms;
 import com.ahmadpour.formapp.data.db.models.Questions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -19,6 +20,16 @@ public interface DbHelper {
 
     Observable<List<Questions>> getFormQuestions(long formId);
 
+    Observable<List<Answers>> getAnswers(long formId);
+
+    Observable<Questions> getAnswerQuestion(long questionId);
+
+    Observable<Boolean> deleteFormAnswers(long formId);
+
     Observable<Long> insertAnswer(Answers answer);
+
+    Observable<Long> inserAnswers(ArrayList<Answers> answers);
+
+    Observable<List<Forms>> getAnsweredForms();
 
 }

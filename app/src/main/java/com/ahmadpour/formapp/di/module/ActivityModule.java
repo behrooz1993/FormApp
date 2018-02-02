@@ -6,6 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.ahmadpour.formapp.di.ActivityContext;
 import com.ahmadpour.formapp.di.PerActivity;
+import com.ahmadpour.formapp.ui.answer.AnswerMvpPresenter;
+import com.ahmadpour.formapp.ui.answer.AnswerMvpView;
+import com.ahmadpour.formapp.ui.answer.AnswerPresenter;
+import com.ahmadpour.formapp.ui.answerList.AnswerListMvpPresenter;
+import com.ahmadpour.formapp.ui.answerList.AnswerListMvpView;
+import com.ahmadpour.formapp.ui.answerList.AnswerListPresenter;
 import com.ahmadpour.formapp.ui.form.FormMvpPresenter;
 import com.ahmadpour.formapp.ui.form.FormMvpView;
 import com.ahmadpour.formapp.ui.form.FormPresenter;
@@ -74,6 +80,20 @@ public class ActivityModule {
     @PerActivity
     FormMvpPresenter<FormMvpView> providesFormPresenter(
             FormPresenter<FormMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    AnswerMvpPresenter<AnswerMvpView> providesAnswerPresenter(
+            AnswerPresenter<AnswerMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    AnswerListMvpPresenter<AnswerListMvpView> providesAnswerListPresenter(
+            AnswerListPresenter<AnswerListMvpView> presenter) {
         return presenter;
     }
 

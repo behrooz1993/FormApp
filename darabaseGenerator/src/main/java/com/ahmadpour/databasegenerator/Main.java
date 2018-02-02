@@ -28,6 +28,7 @@ public class Main {
 
         Entity answer = mSchema.addEntity("Answers");
         answer.addLongProperty("id").primaryKey();
+        answer.addLongProperty("formId");
         answer.addLongProperty("questionId");
         answer.addLongProperty("optionId");
         answer.addStringProperty("answer");

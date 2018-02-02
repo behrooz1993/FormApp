@@ -9,6 +9,7 @@ import com.ahmadpour.formapp.data.db.models.Questions;
 import com.ahmadpour.formapp.data.prefs.PreferencesHelper;
 import com.ahmadpour.formapp.di.ApplicationContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,7 +52,32 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<List<Answers>> getAnswers(long formId) {
+        return mDbHelper.getAnswers(formId);
+    }
+
+    @Override
+    public Observable<Questions> getAnswerQuestion(long questionId) {
+        return mDbHelper.getAnswerQuestion(questionId);
+    }
+
+    @Override
+    public Observable<Boolean> deleteFormAnswers(long formId) {
+        return mDbHelper.deleteFormAnswers(formId);
+    }
+
+    @Override
     public Observable<Long> insertAnswer(Answers answer) {
         return null;
+    }
+
+    @Override
+    public Observable<Long> inserAnswers(ArrayList<Answers> answers) {
+        return mDbHelper.inserAnswers(answers);
+    }
+
+    @Override
+    public Observable<List<Forms>> getAnsweredForms() {
+        return mDbHelper.getAnsweredForms();
     }
 }

@@ -94,23 +94,6 @@ public class DaoMaster extends AbstractDaoMaster {
     }
 
     /** WARNING: Drops all table on Upgrade! Use only during development. */
-//    public static class DevOpenHelper extends OpenHelper {
-//        public DevOpenHelper(Context context, String name) {
-//            super(context, name);
-//        }
-//
-//        public DevOpenHelper(Context context, String name, CursorFactory factory) {
-//            super(context, name, factory);
-//        }
-//
-//        @Override
-//        public void onUpgrade(Database db, int oldVersion, int newVersion) {
-//            Log.i("greenDAO", "Upgrading schema from version " + oldVersion + " to " + newVersion + " by dropping all tables");
-//            dropAllTables(db, true);
-//            onCreate(db);
-//        }
-//    }
-
     public static class DevOpenHelper extends OpenHelper {
         private Context context;
 

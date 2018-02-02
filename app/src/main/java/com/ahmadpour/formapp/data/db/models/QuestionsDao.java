@@ -23,7 +23,7 @@ public class QuestionsDao extends AbstractDao<Questions, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID");
-        public final static Property FormId = new Property(1, Long.class, "formId", false, "FORM_ID");
+        public final static Property FormId = new Property(1, Long.class, "formId", false, "FORMID");
         public final static Property Question = new Property(2, String.class, "question", false, "QUESTION");
         public final static Property Type = new Property(3, Integer.class, "type", false, "TYPE");
     }

@@ -9,6 +9,7 @@ import android.os.Environment;
 public final class AppConstants {
 
     public static final String FORM_ID_BUNDLE = "FormId";
+    public static final String ANSWER_ARRAY_BUNDLE = "Answers";
 
     public static final String STATUS_CODE_SUCCESS = "success";
     public static final String STATUS_CODE_FAILED = "failed";

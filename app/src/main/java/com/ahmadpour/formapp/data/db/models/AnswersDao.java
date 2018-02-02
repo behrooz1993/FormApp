@@ -23,9 +23,10 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID");
-        public final static Property QuestionId = new Property(1, Long.class, "questionId", false, "QUESTION_ID");
-        public final static Property OptionId = new Property(2, Long.class, "optionId", false, "OPTION_ID");
-        public final static Property Answer = new Property(3, String.class, "answer", false, "ANSWER");
+        public final static Property FormId = new Property(1, Long.class, "formId", false, "FORMID");
+        public final static Property QuestionId = new Property(2, Long.class, "questionId", false, "QUESTIONID");
+        public final static Property OptionId = new Property(3, Long.class, "optionId", false, "OPTIONID");
+        public final static Property Answer = new Property(4, String.class, "answer", false, "ANSWER");
     }
 
 
@@ -42,9 +43,10 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"ANSWERS\" (" + //
                 "\"ID\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"QUESTION_ID\" INTEGER," + // 1: questionId
-                "\"OPTION_ID\" INTEGER," + // 2: optionId
-                "\"ANSWER\" TEXT);"); // 3: answer
+                "\"FORM_ID\" INTEGER," + // 1: formId
+                "\"QUESTION_ID\" INTEGER," + // 2: questionId
+                "\"OPTION_ID\" INTEGER," + // 3: optionId
+                "\"ANSWER\" TEXT);"); // 4: answer
     }
 
     /** Drops the underlying database table. */
@@ -62,19 +64,24 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
             stmt.bindLong(1, id);
         }
  
+        Long formId = entity.getFormId();
+        if (formId != null) {
+            stmt.bindLong(2, formId);
+        }
+ 
         Long questionId = entity.getQuestionId();
         if (questionId != null) {
-            stmt.bindLong(2, questionId);
+            stmt.bindLong(3, questionId);
         }
  
         Long optionId = entity.getOptionId();
         if (optionId != null) {
-            stmt.bindLong(3, optionId);
+            stmt.bindLong(4, optionId);
         }
  
         String answer = entity.getAnswer();
         if (answer != null) {
-            stmt.bindString(4, answer);
+            stmt.bindString(5, answer);
         }
     }
 
@@ -87,19 +94,24 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
             stmt.bindLong(1, id);
         }
  
+        Long formId = entity.getFormId();
+        if (formId != null) {
+            stmt.bindLong(2, formId);
+        }
+ 
         Long questionId = entity.getQuestionId();
         if (questionId != null) {
-            stmt.bindLong(2, questionId);
+            stmt.bindLong(3, questionId);
         }
  
         Long optionId = entity.getOptionId();
         if (optionId != null) {
-            stmt.bindLong(3, optionId);
+            stmt.bindLong(4, optionId);
         }
  
         String answer = entity.getAnswer();
         if (answer != null) {
-            stmt.bindString(4, answer);
+            stmt.bindString(5, answer);
         }
     }
 
@@ -112,9 +124,10 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
     public Answers readEntity(Cursor cursor, int offset) {
         Answers entity = new Answers( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // questionId
-            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // optionId
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // answer
+            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // formId
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // questionId
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // optionId
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // answer
         );
         return entity;
     }
@@ -122,9 +135,10 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
     @Override
     public void readEntity(Cursor cursor, Answers entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setQuestionId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setOptionId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
-        entity.setAnswer(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setFormId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
+        entity.setQuestionId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setOptionId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setAnswer(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     @Override

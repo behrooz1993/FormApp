@@ -23,8 +23,8 @@ public class OptionsDao extends AbstractDao<Options, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID");
-        public final static Property FormId = new Property(1, Long.class, "formId", false, "FORM_ID");
-        public final static Property QuestionId = new Property(2, Long.class, "questionId", false, "QUESTION_ID");
+        public final static Property FormId = new Property(1, Long.class, "formId", false, "FORMID");
+        public final static Property QuestionId = new Property(2, Long.class, "questionId", false, "QUESTIONID");
         public final static Property Option = new Property(3, String.class, "option", false, "OPTION");
     }
 

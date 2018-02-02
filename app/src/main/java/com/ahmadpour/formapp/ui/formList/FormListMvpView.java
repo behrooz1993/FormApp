@@ -12,6 +12,5 @@ import java.util.List;
 
 public interface FormListMvpView extends MvpView {
     void openFormActivity(int position);
-
     void refreshFormList(List<Forms> forms);
 }

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ahmadpour.formapp">
 
-    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
-    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
@@ -17,7 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <service android:name=".service.SyncService" />
 
         <activity android:name=".ui.main.MainActivity">
@@ -29,7 +28,8 @@
         </activity>
         <activity android:name=".ui.formList.FormListActivity" />
         <activity android:name=".ui.answerList.AnswerListActivity" />
-        <activity android:name=".ui.form.FormActivity"></activity>
+        <activity android:name=".ui.form.FormActivity" />
+        <activity android:name=".ui.answer.AnswerActivity"></activity>
     </application>
 
 </manifest>
