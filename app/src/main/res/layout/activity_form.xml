@@ -29,6 +29,7 @@
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
         android:textColor="#fff"
-        android:text="submit"/>
+        android:textSize="18sp"
+        android:text="@string/submit_answers"/>
 
 </FrameLayout>

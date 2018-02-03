@@ -43,8 +43,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     protected void setUp() {
-        btnFormList.setText("Form List");
-        btnAnswerList.setText("Answer List");
     }
     @Override
     public void openFormList() {

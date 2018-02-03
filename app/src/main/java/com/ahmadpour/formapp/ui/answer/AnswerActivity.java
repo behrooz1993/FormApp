@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,10 +32,13 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
 
     private ArrayList<Answers> lstAnswers = new ArrayList<>();
     private long formId = 0l;
+    private int type = 1;
 
     @Inject
     AnswerMvpPresenter<AnswerMvpView> mPresenter;
 
+    @BindView(R.id.btn_form_save)
+    public Button btnSave;
     @BindView(R.id.lin_container)
     public LinearLayout linContainer;
 
@@ -50,6 +54,7 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             formId = extras.getLong(AppConstants.FORM_ID_BUNDLE);
+            type = extras.getInt(AppConstants.TYPE_BUNDLE);
         }
 
         setUp();
@@ -59,7 +64,9 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
 
     @Override
     protected void setUp() {
-
+        if(type == 2) {
+            btnSave.setVisibility(View.GONE);
+        }
     }
 
     @Override

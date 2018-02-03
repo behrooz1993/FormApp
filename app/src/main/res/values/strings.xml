@@ -2,5 +2,9 @@
     <string name="app_name">FormApp</string>
 
     <string name="some_error">خطا</string>
+    <string name="form_list">لیست فرم ها</string>
+    <string name="answer_list">لیست پاسخ ها</string>
+    <string name="submit_answers">ثبت پاسخ‌ها</string>
+    <string name="save_form">ذخیره فرم</string>
 
 </resources>

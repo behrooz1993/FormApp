@@ -27,7 +27,8 @@
         android:layout_height="48dp"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
-        android:text="submit"
-        android:textColor="#fff" />
+        android:textSize="18sp"
+        android:textColor="#fff"
+        android:text="@string/save_form"/>
 
 </FrameLayout>

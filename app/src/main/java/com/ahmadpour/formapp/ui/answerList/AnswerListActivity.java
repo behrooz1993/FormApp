@@ -66,6 +66,7 @@ public class AnswerListActivity extends BaseActivity implements AnswerListMvpVie
     @Override
     public void openAnswerActivity(int position) {
         startActivity(new Intent(this, AnswerActivity.class)
-                .putExtra(AppConstants.FORM_ID_BUNDLE, lstForms.get(position).getId()));
+                .putExtra(AppConstants.FORM_ID_BUNDLE, lstForms.get(position).getId())
+                .putExtra(AppConstants.TYPE_BUNDLE, 2));
     }
 }

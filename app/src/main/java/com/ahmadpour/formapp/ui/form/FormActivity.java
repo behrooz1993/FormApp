@@ -95,7 +95,8 @@ public class FormActivity extends BaseActivity implements FormMvpView {
     @Override
     public void openAnswerPage() {
         startActivity(new Intent(this, AnswerActivity.class)
-                .putExtra(AppConstants.FORM_ID_BUNDLE, formId));
+                .putExtra(AppConstants.FORM_ID_BUNDLE, formId)
+                .putExtra(AppConstants.TYPE_BUNDLE, 1));
 //        startActivity(new Intent(this, AnswerActivity.class)
 //                .putParcelableArrayListExtra(AppConstants.ANSWER_ARRAY_BUNDLE,
 //                        new ArrayList<Answers>(Arrays.asList(arrAnswers))));
