@@ -226,6 +226,16 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
+    public Observable<Long> insertCode(Codes code) {
+        return Observable.fromCallable(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                return mDaoSession.getCodesDao().insert(code);
+            }
+        });
+    }
+
+    @Override
     public Observable<List<Codes>> getCodes() {
         return Observable.fromCallable(new Callable<List<Codes>>() {
             @Override

@@ -1,10 +1,15 @@
 package com.ahmadpour.formapp.ui.answer;
 
+import android.widget.Toast;
+
+import com.ahmadpour.formapp.R;
 import com.ahmadpour.formapp.data.DataManager;
 import com.ahmadpour.formapp.data.db.models.Answers;
 import com.ahmadpour.formapp.ui.base.BasePresenter;
 import com.ahmadpour.formapp.utils.rx.SchedulerProvider;
+import com.ahmadpour.formapp.utils.tools.Gzip;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,5 +51,30 @@ public class AnswerPresenter<V extends AnswerMvpView> extends BasePresenter<V> i
                     }
                 }));
 
+    }
+
+    private void generateFollowCode(ArrayList<Answers> answers) {
+        String result = "1000101";
+        for (Answers answer : answers) {
+            if (answer.getQuestion().getType() == 1) {
+                continue;
+            }
+            if (answer.getOptionId() == 0) {
+                result += "0";
+            } else {
+                for (int i = 0; i < answer.getQuestion().getOptions().size(); i++) {
+                    if (answer.getQuestion().getOptions().get(i).getId() == answer.getOptionId()) {
+                        result += (i + 1) + "";
+                    }
+                }
+            }
+        }
+        String compress = "";
+        try {
+            compress = Gzip.compress(result).toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

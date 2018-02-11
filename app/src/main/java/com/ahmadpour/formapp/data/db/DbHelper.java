@@ -41,6 +41,8 @@ public interface DbHelper {
 
     Observable<List<String>> getFormAnswerList(long formId);
 
+    Observable<Long> insertCode(Codes code);
+
     Observable<List<Codes>> getCodes();
 
 }

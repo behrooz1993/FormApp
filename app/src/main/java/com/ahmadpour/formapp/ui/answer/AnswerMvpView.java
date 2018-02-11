@@ -12,6 +12,7 @@ import java.util.List;
 public interface AnswerMvpView extends MvpView{
 
     void fetchAnswers(List<Answers> answers);
+    void onCodeAdded();
     void openMainActivity();
 
 }

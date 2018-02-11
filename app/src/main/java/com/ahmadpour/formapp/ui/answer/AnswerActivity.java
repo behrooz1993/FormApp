@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ahmadpour.formapp.R;
 import com.ahmadpour.formapp.data.db.models.Answers;
@@ -79,6 +80,10 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
     }
 
     @Override
+    public void onCodeAdded() {
+    }
+
+    @Override
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -146,8 +151,10 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
         String compress = "";
         try {
             compress = Gzip.compress(result).toString();
+
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(this,getString(R.string.error_in_follow_code_generation),Toast.LENGTH_SHORT).show();
         }
     }
 }

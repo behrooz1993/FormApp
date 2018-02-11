@@ -6,5 +6,6 @@
     <string name="answer_list">لیست پاسخ ها</string>
     <string name="submit_answers">ثبت پاسخ‌ها</string>
     <string name="save_form">ذخیره فرم</string>
+    <string name="error_in_follow_code_generation">خطا در تولید کد پیگیری</string>
 
 </resources>
