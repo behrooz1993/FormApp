@@ -27,6 +27,8 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
         public final static Property QuestionId = new Property(2, Long.class, "questionId", false, "QUESTIONID");
         public final static Property OptionId = new Property(3, Long.class, "optionId", false, "OPTIONID");
         public final static Property Answer = new Property(4, String.class, "answer", false, "ANSWER");
+        public final static Property Temp = new Property(5, Integer.class, "temp", false, "TEMP");
+        public final static Property Date = new Property(6, String.class, "date", false, "DATE");
     }
 
 
@@ -46,7 +48,9 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
                 "\"FORM_ID\" INTEGER," + // 1: formId
                 "\"QUESTION_ID\" INTEGER," + // 2: questionId
                 "\"OPTION_ID\" INTEGER," + // 3: optionId
-                "\"ANSWER\" TEXT);"); // 4: answer
+                "\"ANSWER\" TEXT," + // 4: answer
+                "\"TEMP\" INTEGER," + // 5: temp
+                "\"DATE\" TEXT);"); // 6: date
     }
 
     /** Drops the underlying database table. */
@@ -83,6 +87,16 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
         if (answer != null) {
             stmt.bindString(5, answer);
         }
+ 
+        Integer temp = entity.getTemp();
+        if (temp != null) {
+            stmt.bindLong(6, temp);
+        }
+ 
+        String date = entity.getDate();
+        if (date != null) {
+            stmt.bindString(7, date);
+        }
     }
 
     @Override
@@ -113,6 +127,16 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
         if (answer != null) {
             stmt.bindString(5, answer);
         }
+ 
+        Integer temp = entity.getTemp();
+        if (temp != null) {
+            stmt.bindLong(6, temp);
+        }
+ 
+        String date = entity.getDate();
+        if (date != null) {
+            stmt.bindString(7, date);
+        }
     }
 
     @Override
@@ -127,7 +151,9 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // formId
             cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // questionId
             cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // optionId
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // answer
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // answer
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // temp
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // date
         );
         return entity;
     }
@@ -139,6 +165,8 @@ public class AnswersDao extends AbstractDao<Answers, Long> {
         entity.setQuestionId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
         entity.setOptionId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
         entity.setAnswer(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setTemp(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setDate(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override

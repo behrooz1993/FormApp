@@ -36,7 +36,15 @@ public class AnswerPresenter<V extends AnswerMvpView> extends BasePresenter<V> i
     }
 
     @Override
-    public void onSubmitButtonClicked() {
-        getMvpView().openMainActivity();
+    public void onSubmitButtonClicked(ArrayList<Answers> answers) {
+        getCompositeDisposable().add(getDataManager().updateFormAnswers(answers)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(result -> {
+                    if (result) {
+                        getMvpView().openMainActivity();
+                    }
+                }));
+
     }
 }

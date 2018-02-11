@@ -12,6 +12,12 @@ import com.ahmadpour.formapp.ui.answer.AnswerPresenter;
 import com.ahmadpour.formapp.ui.answerList.AnswerListMvpPresenter;
 import com.ahmadpour.formapp.ui.answerList.AnswerListMvpView;
 import com.ahmadpour.formapp.ui.answerList.AnswerListPresenter;
+import com.ahmadpour.formapp.ui.answers.AnswersMvpPresenter;
+import com.ahmadpour.formapp.ui.answers.AnswersMvpView;
+import com.ahmadpour.formapp.ui.answers.AnswersPresenter;
+import com.ahmadpour.formapp.ui.codeList.CodeListMvpPresenter;
+import com.ahmadpour.formapp.ui.codeList.CodeListMvpView;
+import com.ahmadpour.formapp.ui.codeList.CodeListPresenter;
 import com.ahmadpour.formapp.ui.form.FormMvpPresenter;
 import com.ahmadpour.formapp.ui.form.FormMvpView;
 import com.ahmadpour.formapp.ui.form.FormPresenter;
@@ -94,6 +100,20 @@ public class ActivityModule {
     @PerActivity
     AnswerListMvpPresenter<AnswerListMvpView> providesAnswerListPresenter(
             AnswerListPresenter<AnswerListMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    AnswersMvpPresenter<AnswersMvpView> providesAnswersPresenter(
+            AnswersPresenter<AnswersMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    CodeListMvpPresenter<CodeListMvpView> providesCodeListPresenter(
+            CodeListPresenter<CodeListMvpView> presenter) {
         return presenter;
     }
 

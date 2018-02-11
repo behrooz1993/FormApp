@@ -10,6 +10,7 @@ import com.ahmadpour.formapp.R;
 import com.ahmadpour.formapp.data.db.models.Answers;
 import com.ahmadpour.formapp.data.db.models.Forms;
 import com.ahmadpour.formapp.ui.answer.AnswerActivity;
+import com.ahmadpour.formapp.ui.answers.AnswersActivity;
 import com.ahmadpour.formapp.ui.base.BaseActivity;
 import com.ahmadpour.formapp.utils.AppConstants;
 import com.ahmadpour.formapp.utils.tools.RecyclerItemClickListener;
@@ -65,7 +66,10 @@ public class AnswerListActivity extends BaseActivity implements AnswerListMvpVie
 
     @Override
     public void openAnswerActivity(int position) {
-        startActivity(new Intent(this, AnswerActivity.class)
+//        startActivity(new Intent(this, AnswerActivity.class)
+//                .putExtra(AppConstants.FORM_ID_BUNDLE, lstForms.get(position).getId())
+//                .putExtra(AppConstants.TYPE_BUNDLE, 2));
+        startActivity(new Intent(this, AnswersActivity.class)
                 .putExtra(AppConstants.FORM_ID_BUNDLE, lstForms.get(position).getId())
                 .putExtra(AppConstants.TYPE_BUNDLE, 2));
     }

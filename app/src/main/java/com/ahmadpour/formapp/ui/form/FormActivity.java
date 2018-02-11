@@ -8,9 +8,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ahmadpour.formapp.R;
@@ -19,6 +21,7 @@ import com.ahmadpour.formapp.data.db.models.Questions;
 import com.ahmadpour.formapp.ui.answer.AnswerActivity;
 import com.ahmadpour.formapp.ui.base.BaseActivity;
 import com.ahmadpour.formapp.utils.AppConstants;
+import com.ahmadpour.formapp.utils.AppUtils;
 import com.ahmadpour.formapp.utils.tools.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class FormActivity extends BaseActivity implements FormMvpView {
     private int counter = 0;
     private ArrayList<Questions> lstQuestions = new ArrayList<>();
     private Answers[] arrAnswers;
+    private String date = "";
 
     @Inject
     FormMvpPresenter<FormMvpView> mPresenter;
@@ -54,6 +58,7 @@ public class FormActivity extends BaseActivity implements FormMvpView {
         getActivityComponent().inject(this);
         setUnBinder(ButterKnife.bind(this));
         mPresenter.onAttach(FormActivity.this);
+        date = AppUtils.getCurrentIranianDateString();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -82,6 +87,8 @@ public class FormActivity extends BaseActivity implements FormMvpView {
             }
             arrAnswers[i].setFormId(formId);
             arrAnswers[i].setQuestionId(lstQuestions.get(i).getId());
+            arrAnswers[i].setTemp(1);
+            arrAnswers[i].setDate(date);
         }
 
         createQuestions();
@@ -96,7 +103,8 @@ public class FormActivity extends BaseActivity implements FormMvpView {
     public void openAnswerPage() {
         startActivity(new Intent(this, AnswerActivity.class)
                 .putExtra(AppConstants.FORM_ID_BUNDLE, formId)
-                .putExtra(AppConstants.TYPE_BUNDLE, 1));
+                .putExtra(AppConstants.TYPE_BUNDLE, 1)
+                .putExtra(AppConstants.DATE_BUNDLE, date));
 //        startActivity(new Intent(this, AnswerActivity.class)
 //                .putParcelableArrayListExtra(AppConstants.ANSWER_ARRAY_BUNDLE,
 //                        new ArrayList<Answers>(Arrays.asList(arrAnswers))));
@@ -112,7 +120,8 @@ public class FormActivity extends BaseActivity implements FormMvpView {
             if (question.getType() == 1) {
                 createTextQuestion(question);
             } else {
-                createListQuestion(question);
+//                createListQuestion(question);
+                createSpinnerQuestion(question);
             }
         }
     }
@@ -151,6 +160,7 @@ public class FormActivity extends BaseActivity implements FormMvpView {
         View view = LayoutInflater.from(this).inflate(R.layout.row_question_list, linContainer, false);
         TextView lblTitle = view.findViewById(R.id.lbl_row_question_list_title);
         RecyclerView listView = view.findViewById(R.id.lst_row_question_list);
+
         lblTitle.setText(question.getId() + " - " + question.getQuestion() + " ؟");
         listView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         OptionAdapter adapter = new OptionAdapter(question.getOptions());
@@ -160,6 +170,28 @@ public class FormActivity extends BaseActivity implements FormMvpView {
             adapter.notifyDataSetChanged();
             arrAnswers[(int) view.getTag()].setOptionId(question.getOptions().get(position).getId());
         }));
+        view.setTag(counter);
+        linContainer.addView(view);
+        counter += 1;
+    }
+
+    private void createSpinnerQuestion(Questions question) {
+        View view = LayoutInflater.from(this).inflate(R.layout.row_question_list, linContainer, false);
+        TextView lblTitle = view.findViewById(R.id.lbl_row_question_list_title);
+        Spinner spinner = view.findViewById(R.id.spn_row_question_list);
+        lblTitle.setText(question.getId() + " - " + question.getQuestion() + " ؟");
+        spinner.setAdapter(new OptionSpinnerAdapter(question.getOptions()));
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View itemView, int position, long l) {
+                arrAnswers[(int) view.getTag()].setOptionId(question.getOptions().get(position).getId());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         view.setTag(counter);
         linContainer.addView(view);
         counter += 1;

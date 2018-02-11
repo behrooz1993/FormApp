@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.ahmadpour.formapp.data.db.DbHelper;
 import com.ahmadpour.formapp.data.db.models.Answers;
+import com.ahmadpour.formapp.data.db.models.Codes;
 import com.ahmadpour.formapp.data.db.models.Forms;
 import com.ahmadpour.formapp.data.db.models.Questions;
 import com.ahmadpour.formapp.data.prefs.PreferencesHelper;
@@ -62,6 +63,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<Boolean> deleteFormTempAnswers(long formId) {
+        return mDbHelper.deleteFormTempAnswers(formId);
+    }
+
+    @Override
+    public Observable<Boolean> updateFormAnswers(ArrayList<Answers> answers) {
+        return mDbHelper.updateFormAnswers(answers);
+    }
+
+    @Override
     public Observable<Boolean> deleteFormAnswers(long formId) {
         return mDbHelper.deleteFormAnswers(formId);
     }
@@ -79,5 +90,20 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<List<Forms>> getAnsweredForms() {
         return mDbHelper.getAnsweredForms();
+    }
+
+    @Override
+    public Observable<Boolean> deleteTempAnswers() {
+        return mDbHelper.deleteTempAnswers();
+    }
+
+    @Override
+    public Observable<List<String>> getFormAnswerList(long formId) {
+        return mDbHelper.getFormAnswerList(formId);
+    }
+
+    @Override
+    public Observable<List<Codes>> getCodes() {
+        return mDbHelper.getCodes();
     }
 }

@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setUnBinder(ButterKnife.bind(this));
 
         mPresenter.onAttach(MainActivity.this);
+        mPresenter.deleteTempAnswers();
 
         setUp();
     }

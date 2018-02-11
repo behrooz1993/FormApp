@@ -1,8 +1,5 @@
 package com.ahmadpour.formapp.data.db.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import org.greenrobot.greendao.annotation.*;
 
 import java.util.ArrayList;
@@ -13,7 +10,7 @@ import java.util.ArrayList;
  * Entity mapped to table "QUESTIONS".
  */
 @Entity
-public class Questions implements Parcelable{
+public class Questions {
 
     @Id
     private Long id;
@@ -37,38 +34,6 @@ public class Questions implements Parcelable{
         this.question = question;
         this.type = type;
     }
-
-    protected Questions(Parcel in) {
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readLong();
-        }
-        if (in.readByte() == 0) {
-            formId = null;
-        } else {
-            formId = in.readLong();
-        }
-        question = in.readString();
-        if (in.readByte() == 0) {
-            type = null;
-        } else {
-            type = in.readInt();
-        }
-        options = in.createTypedArrayList(Options.CREATOR);
-    }
-
-    public static final Creator<Questions> CREATOR = new Creator<Questions>() {
-        @Override
-        public Questions createFromParcel(Parcel in) {
-            return new Questions(in);
-        }
-
-        @Override
-        public Questions[] newArray(int size) {
-            return new Questions[size];
-        }
-    };
 
     public Long getId() {
         return id;
@@ -108,34 +73,5 @@ public class Questions implements Parcelable{
 
     public void setOptions(ArrayList<Options> options) {
         this.options = options;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        if (id == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(id);
-        }
-        if (formId == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(formId);
-        }
-        parcel.writeString(question);
-        if (type == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(type);
-        }
-        parcel.writeTypedList(options);
     }
 }

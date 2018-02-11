@@ -15,23 +15,18 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/lbl_row_question_list_title"
+            android:id="@+id/lbl_row_answer_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             android:padding="8dp" />
 
-        <Spinner
-            android:id="@+id/spn_row_question_list"
+        <TextView
+            android:id="@+id/lbl_row_answer"
             android:layout_width="match_parent"
-            android:layout_height="40dp"/>
-        
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/lst_row_question_list"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp" 
-            android:visibility="gone"/>
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="8dp" />
 
     </LinearLayout>
 

@@ -2,23 +2,21 @@ package com.ahmadpour.formapp.ui.answer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ahmadpour.formapp.R;
 import com.ahmadpour.formapp.data.db.models.Answers;
+import com.ahmadpour.formapp.data.db.models.Options;
 import com.ahmadpour.formapp.ui.base.BaseActivity;
-import com.ahmadpour.formapp.ui.form.FormActivity;
-import com.ahmadpour.formapp.ui.form.OptionAdapter;
 import com.ahmadpour.formapp.ui.main.MainActivity;
 import com.ahmadpour.formapp.utils.AppConstants;
+import com.ahmadpour.formapp.utils.tools.Gzip;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +31,7 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
     private ArrayList<Answers> lstAnswers = new ArrayList<>();
     private long formId = 0l;
     private int type = 1;
+    private String date = "";
 
     @Inject
     AnswerMvpPresenter<AnswerMvpView> mPresenter;
@@ -55,16 +54,16 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
         if (extras != null) {
             formId = extras.getLong(AppConstants.FORM_ID_BUNDLE);
             type = extras.getInt(AppConstants.TYPE_BUNDLE);
+            date = extras.getString(AppConstants.DATE_BUNDLE);
         }
 
         setUp();
         mPresenter.fetchAnswers(formId);
-
     }
 
     @Override
     protected void setUp() {
-        if(type == 2) {
+        if (type == 2) {
             btnSave.setVisibility(View.GONE);
         }
     }
@@ -73,6 +72,9 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
     public void fetchAnswers(List<Answers> answers) {
         lstAnswers.removeAll(lstAnswers);
         lstAnswers.addAll(answers);
+        for(Answers answer : answers) {
+            answer.setTemp(0);
+        }
         createAnswers();
     }
 
@@ -85,19 +87,11 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
 
     @OnClick(R.id.btn_form_save)
     public void btnSaveClicked() {
-        mPresenter.onSubmitButtonClicked();
+        generateFollowCode();
+        mPresenter.onSubmitButtonClicked(lstAnswers);
     }
 
     private void createAnswers() {
-        for (Answers answer : lstAnswers) {
-            if (answer.getQuestion().getType() == 1) {
-
-            } else {
-
-            }
-        }
-
-
         for (Answers answer : lstAnswers) {
             if (answer.getOptionId() == -1) {
                 createTextAnswer(answer);
@@ -108,27 +102,52 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
     }
 
     private void createTextAnswer(Answers answer) {
-        View view = LayoutInflater.from(this).inflate(R.layout.row_question_text, linContainer, false);
-        TextView lblTitle = view.findViewById(R.id.lbl_row_question_text_title);
-        EditText txtQuestion = view.findViewById(R.id.txt_row_question_text);
-        txtQuestion.setEnabled(false);
-        lblTitle.setText(answer.getQuestionId() + " - " + answer.getQuestion().getQuestion() + " ؟");
+        View view = LayoutInflater.from(this).inflate(R.layout.row_answer, linContainer, false);
+        TextView lblQuestion = view.findViewById(R.id.lbl_row_answer_question);
+        TextView lblAnswer = view.findViewById(R.id.lbl_row_answer);
+        lblQuestion.setText(answer.getQuestionId() + " - " + answer.getQuestion().getQuestion() + " ؟");
         if (answer.getAnswer() != null) {
             if (!answer.getAnswer().equals("0")) {
-                txtQuestion.setText(answer.getAnswer());
+                lblAnswer.setText(answer.getAnswer());
             }
         }
         linContainer.addView(view);
     }
 
     private void createListAnswer(Answers answer) {
-        View view = LayoutInflater.from(this).inflate(R.layout.row_question_list, linContainer, false);
-        TextView lblTitle = view.findViewById(R.id.lbl_row_question_list_title);
-        RecyclerView listView = view.findViewById(R.id.lst_row_question_list);
-        lblTitle.setText(answer.getQuestionId() + " - " + answer.getQuestion().getQuestion() + " ؟");
-        listView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        AnswerOptionAdapter adapter = new AnswerOptionAdapter(answer.getOptionId(), answer.getQuestion().getOptions());
-        listView.setAdapter(adapter);
+        View view = LayoutInflater.from(this).inflate(R.layout.row_answer, linContainer, false);
+        TextView lblQuestion = view.findViewById(R.id.lbl_row_answer_question);
+        TextView lblAnswer = view.findViewById(R.id.lbl_row_answer);
+        lblQuestion.setText(answer.getQuestionId() + " - " + answer.getQuestion().getQuestion() + " ؟");
+        for (Options option : answer.getQuestion().getOptions()) {
+            if(option.getId() == answer.getOptionId()) {
+                lblAnswer.setText(option.getOption());
+            }
+        }
         linContainer.addView(view);
+    }
+
+    private void generateFollowCode() {
+        String result = "1000101";
+        for (Answers answer : lstAnswers) {
+            if (answer.getQuestion().getType() == 1) {
+                continue;
+            }
+            if (answer.getOptionId() == 0) {
+                result += "0";
+            } else {
+                for (int i = 0; i < answer.getQuestion().getOptions().size(); i++) {
+                    if (answer.getQuestion().getOptions().get(i).getId() == answer.getOptionId()) {
+                        result += (i + 1) + "";
+                    }
+                }
+            }
+        }
+        String compress = "";
+        try {
+            compress = Gzip.compress(result).toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

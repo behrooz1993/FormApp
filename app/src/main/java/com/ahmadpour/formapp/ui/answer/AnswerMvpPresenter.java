@@ -12,6 +12,6 @@ import java.util.ArrayList;
 public interface AnswerMvpPresenter<V extends AnswerMvpView> extends MvpPresenter<V> {
 
     void fetchAnswers(long formId);
-    void onSubmitButtonClicked();
+    void onSubmitButtonClicked(ArrayList<Answers> answers);
 
 }

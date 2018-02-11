@@ -43,7 +43,7 @@ public class FormPresenter<V extends FormMvpView> extends BasePresenter<V> imple
 
     @Override
     public void onSubmitButtonClicked(long formId) {
-        getCompositeDisposable().add(getDataManager().deleteFormAnswers(formId)
+        getCompositeDisposable().add(getDataManager().deleteFormTempAnswers(formId)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(result -> {

@@ -29,7 +29,9 @@
         <activity android:name=".ui.formList.FormListActivity" />
         <activity android:name=".ui.answerList.AnswerListActivity" />
         <activity android:name=".ui.form.FormActivity" />
-        <activity android:name=".ui.answer.AnswerActivity"></activity>
+        <activity android:name=".ui.answer.AnswerActivity" />
+        <activity android:name=".ui.answers.AnswersActivity" />
+        <activity android:name=".ui.codeList.CodeListActivity"></activity>
     </application>
 
 </manifest>

@@ -18,7 +18,7 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     public MainPresenter(DataManager dataManager,
                          SchedulerProvider schedulerProvider,
                          CompositeDisposable compositeDisposable) {
-        super(dataManager,schedulerProvider,compositeDisposable);
+        super(dataManager, schedulerProvider, compositeDisposable);
     }
 
     @Override
@@ -34,5 +34,15 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     @Override
     public void onAnswerListButtonClicked() {
         getMvpView().openAnswerList();
+    }
+
+    @Override
+    public void deleteTempAnswers() {
+        getCompositeDisposable().add(getDataManager().deleteTempAnswers()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(result -> {
+
+                }));
     }
 }

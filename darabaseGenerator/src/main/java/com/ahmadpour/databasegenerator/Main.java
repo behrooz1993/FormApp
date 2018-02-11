@@ -32,6 +32,14 @@ public class Main {
         answer.addLongProperty("questionId");
         answer.addLongProperty("optionId");
         answer.addStringProperty("answer");
+        answer.addIntProperty("temp");
+        answer.addStringProperty("date");
+
+        Entity code = mSchema.addEntity("Codes");
+        code.addLongProperty("id").primaryKey();
+        code.addLongProperty("formId");
+        code.addStringProperty("date");
+        code.addStringProperty("code");
 
         new DaoGenerator().generateAll(mSchema, "../app/src/main/java");
     }

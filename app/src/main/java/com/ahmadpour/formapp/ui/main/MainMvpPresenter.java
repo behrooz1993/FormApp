@@ -12,5 +12,6 @@ public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V>
 
     void onFormListButtonClicked();
     void onAnswerListButtonClicked();
+    void deleteTempAnswers();
 
 }
