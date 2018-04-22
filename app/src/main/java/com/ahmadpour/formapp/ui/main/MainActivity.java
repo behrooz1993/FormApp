@@ -3,12 +3,9 @@ package com.ahmadpour.formapp.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.ahmadpour.formapp.R;
-import com.ahmadpour.formapp.ui.answerList.AnswerListActivity;
 import com.ahmadpour.formapp.ui.base.BaseActivity;
-import com.ahmadpour.formapp.ui.codeList.CodeListActivity;
 import com.ahmadpour.formapp.ui.formList.FormListActivity;
 
 import javax.inject.Inject;
@@ -54,12 +51,10 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void openAnswerList() {
-        startActivity(new Intent(this, AnswerListActivity.class));
     }
 
     @Override
     public void openCodeList() {
-        startActivity(new Intent(this, CodeListActivity.class));
     }
 
     @OnClick(R.id.btn_form_list)
