@@ -156,25 +156,6 @@ public class FormActivity extends BaseActivity implements FormMvpView {
         counter += 1;
     }
 
-    private void createListQuestion(Questions question) {
-        View view = LayoutInflater.from(this).inflate(R.layout.row_question_list, linContainer, false);
-        TextView lblTitle = view.findViewById(R.id.lbl_row_question_list_title);
-        RecyclerView listView = view.findViewById(R.id.lst_row_question_list);
-
-        lblTitle.setText(question.getId() + " - " + question.getQuestion() + " ؟");
-        listView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        OptionAdapter adapter = new OptionAdapter(question.getOptions());
-        listView.setAdapter(adapter);
-        listView.addOnItemTouchListener(new RecyclerItemClickListener(this, (view1, position) -> {
-            adapter.setSelectedPosition(position);
-            adapter.notifyDataSetChanged();
-            arrAnswers[(int) view.getTag()].setOptionId(question.getOptions().get(position).getId());
-        }));
-        view.setTag(counter);
-        linContainer.addView(view);
-        counter += 1;
-    }
-
     private void createSpinnerQuestion(Questions question) {
         View view = LayoutInflater.from(this).inflate(R.layout.row_question_list, linContainer, false);
         TextView lblTitle = view.findViewById(R.id.lbl_row_question_list_title);

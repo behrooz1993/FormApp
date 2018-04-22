@@ -67,4 +67,8 @@ dependencies {
     // debug database
     debugImplementation "com.amitshekhar.android:debug-db:$rootProject.debugDBVersion"
 
+//    compile 'com.amitshekhar.android:jackson-android-networking:1.0.1'
+    compile "com.amitshekhar.android:jackson-android-networking:$rootProject.androidFastNetworking"
+
+
 }

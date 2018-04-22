@@ -2,6 +2,8 @@ package com.ahmadpour.formapp.ui.answer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.RenderScript;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,11 @@ import com.ahmadpour.formapp.ui.base.BaseActivity;
 import com.ahmadpour.formapp.ui.main.MainActivity;
 import com.ahmadpour.formapp.utils.AppConstants;
 import com.ahmadpour.formapp.utils.tools.Gzip;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,8 +100,31 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
 
     @OnClick(R.id.btn_form_save)
     public void btnSaveClicked() {
-        generateFollowCode();
-        mPresenter.onSubmitButtonClicked(lstAnswers);
+//        generateFollowCode();
+//        mPresenter.onSubmitButtonClicked(lstAnswers);
+        String result = "";
+        for(Answers answer : lstAnswers) {
+            if (!result.isEmpty()) {
+                result += " | ";
+            }
+            result += answer.toString();
+        }
+        Log.i("TAG",result);
+        AndroidNetworking.post("https://fierce-cove-29863.herokuapp.com/createAnUser")
+                .addBodyParameter("firstname", "Amit")
+                .addBodyParameter("lastname", "Shekhar")
+                .setTag("test")
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                    }
+                });
     }
 
     private void createAnswers() {

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ahmadpour.formapp">
 
-    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
-    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
@@ -27,13 +27,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.formList.FormListActivity" />
-        <activity android:name=".ui.answerList.AnswerListActivity" />
         <activity
             android:name=".ui.form.FormActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.answer.AnswerActivity" />
-        <activity android:name=".ui.answers.AnswersActivity" />
-        <activity android:name=".ui.codeList.CodeListActivity"></activity>
     </application>
 
 </manifest>

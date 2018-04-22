@@ -102,4 +102,9 @@ public class Answers {
     public void setQuestion(Questions question) {
         this.question = question;
     }
+
+    @Override
+    public String toString() {
+        return question.getQuestion() + " : " + answer;
+    }
 }
