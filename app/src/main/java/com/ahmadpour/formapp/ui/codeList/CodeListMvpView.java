@@ -12,5 +12,6 @@ import java.util.List;
 public interface CodeListMvpView extends MvpView {
 
     void onFetchCodes(List<Codes> codes);
+    void onExportCompleted(boolean success);
 
 }

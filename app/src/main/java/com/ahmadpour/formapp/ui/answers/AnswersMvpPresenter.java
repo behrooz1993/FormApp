@@ -9,5 +9,6 @@ import com.ahmadpour.formapp.ui.base.MvpPresenter;
 public interface AnswersMvpPresenter<V extends AnswersMvpView> extends MvpPresenter<V> {
 
     void getAnswers(long formId);
+    void onListItemClicked(int position);
 
 }

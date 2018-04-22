@@ -1,6 +1,8 @@
 package com.ahmadpour.formapp.data.db;
 
 
+import android.database.Cursor;
+
 import com.ahmadpour.formapp.data.db.models.Answers;
 import com.ahmadpour.formapp.data.db.models.Codes;
 import com.ahmadpour.formapp.data.db.models.Forms;
@@ -21,7 +23,7 @@ public interface DbHelper {
 
     Observable<List<Questions>> getFormQuestions(long formId);
 
-    Observable<List<Answers>> getAnswers(long formId);
+    Observable<List<Answers>> getAnswers(long formId,String date);
 
     Observable<Questions> getAnswerQuestion(long questionId);
 
@@ -44,5 +46,7 @@ public interface DbHelper {
     Observable<Long> insertCode(Codes code);
 
     Observable<List<Codes>> getCodes();
+
+    Observable<Cursor> getCodeTable();
 
 }

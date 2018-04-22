@@ -1,5 +1,6 @@
 package com.ahmadpour.formapp.ui.answers;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import com.ahmadpour.formapp.ui.answer.AnswerMvpPresenter;
 import com.ahmadpour.formapp.ui.answer.AnswerMvpView;
 import com.ahmadpour.formapp.ui.base.BaseActivity;
 import com.ahmadpour.formapp.utils.AppConstants;
+import com.ahmadpour.formapp.utils.tools.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,11 +61,22 @@ public class AnswersActivity extends BaseActivity implements AnswersMvpView {
         listView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new AnswersAdapter(this.answers);
         listView.setAdapter(mAdapter);
+        listView.addOnItemTouchListener(new RecyclerItemClickListener(this, (view, position) -> {
+            mPresenter.onListItemClicked(position);
+        }));
     }
 
     @Override
     public void fetchAnswersList(List<String> answers) {
         this.answers.addAll(answers);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void openAnswerActivity(int position) {
+        startActivity(new Intent(this, AnswerActivity.class)
+                .putExtra(AppConstants.FORM_ID_BUNDLE, formId)
+                .putExtra(AppConstants.TYPE_BUNDLE, 2)
+                .putExtra(AppConstants.DATE_BUNDLE, answers.get(position)));
     }
 }

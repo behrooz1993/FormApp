@@ -12,5 +12,6 @@ import java.util.List;
 public interface AnswersMvpView extends MvpView {
 
     void fetchAnswersList(List<String> answers);
+    void openAnswerActivity(int position);
 
 }

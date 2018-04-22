@@ -30,4 +30,9 @@ public class AnswersPresenter<V extends AnswersMvpView> extends BasePresenter<V>
                     getMvpView().fetchAnswersList(answers);
                 }));
     }
+
+    @Override
+    public void onListItemClicked(int position) {
+        getMvpView().openAnswerActivity(position);
+    }
 }

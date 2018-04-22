@@ -10,5 +10,5 @@ public interface MainMvpView extends MvpView{
 
     void openFormList();
     void openAnswerList();
-
+    void openCodeList();
 }

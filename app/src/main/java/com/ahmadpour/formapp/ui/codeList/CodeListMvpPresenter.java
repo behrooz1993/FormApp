@@ -9,5 +9,5 @@ import com.ahmadpour.formapp.ui.base.MvpPresenter;
 public interface CodeListMvpPresenter<V extends CodeListMvpView> extends MvpPresenter<V> {
 
     void fetchCodes();
-
+    void btnExportClicked();
 }

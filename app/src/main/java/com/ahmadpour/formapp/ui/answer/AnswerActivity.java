@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.ahmadpour.formapp.R;
 import com.ahmadpour.formapp.data.db.models.Answers;
+import com.ahmadpour.formapp.data.db.models.Codes;
 import com.ahmadpour.formapp.data.db.models.Options;
 import com.ahmadpour.formapp.ui.base.BaseActivity;
 import com.ahmadpour.formapp.ui.main.MainActivity;
@@ -59,7 +60,7 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
         }
 
         setUp();
-        mPresenter.fetchAnswers(formId);
+        mPresenter.fetchAnswers(formId, date);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
     public void fetchAnswers(List<Answers> answers) {
         lstAnswers.removeAll(lstAnswers);
         lstAnswers.addAll(answers);
-        for(Answers answer : answers) {
+        for (Answers answer : answers) {
             answer.setTemp(0);
         }
         createAnswers();
@@ -113,8 +114,12 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
         lblQuestion.setText(answer.getQuestionId() + " - " + answer.getQuestion().getQuestion() + " ؟");
         if (answer.getAnswer() != null) {
             if (!answer.getAnswer().equals("0")) {
-                lblAnswer.setText(answer.getAnswer());
+                lblAnswer.setText(getString(R.string.answer) + " : " + answer.getAnswer());
+            }else {
+                lblAnswer.setText(getString(R.string.no_answer));
             }
+        }else {
+            lblAnswer.setText(getString(R.string.no_answer));
         }
         linContainer.addView(view);
     }
@@ -124,9 +129,13 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
         TextView lblQuestion = view.findViewById(R.id.lbl_row_answer_question);
         TextView lblAnswer = view.findViewById(R.id.lbl_row_answer);
         lblQuestion.setText(answer.getQuestionId() + " - " + answer.getQuestion().getQuestion() + " ؟");
-        for (Options option : answer.getQuestion().getOptions()) {
-            if(option.getId() == answer.getOptionId()) {
-                lblAnswer.setText(option.getOption());
+        if(answer.getOptionId() == 0) {
+            lblAnswer.setText(getString(R.string.no_answer));
+        }else {
+            for (Options option : answer.getQuestion().getOptions()) {
+                if (option.getId() == answer.getOptionId()) {
+                    lblAnswer.setText(getString(R.string.answer) + " : " + option.getOption());
+                }
             }
         }
         linContainer.addView(view);
@@ -151,10 +160,14 @@ public class AnswerActivity extends BaseActivity implements AnswerMvpView {
         String compress = "";
         try {
             compress = Gzip.compress(result).toString();
-
+            Codes code = new Codes();
+            code.setCode(compress);
+            code.setDate(date);
+            code.setFormId(formId);
+            mPresenter.insertCode(code);
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this,getString(R.string.error_in_follow_code_generation),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.error_in_follow_code_generation), Toast.LENGTH_SHORT).show();
         }
     }
 }

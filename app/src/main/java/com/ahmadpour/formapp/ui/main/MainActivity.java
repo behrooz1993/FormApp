@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.ahmadpour.formapp.R;
 import com.ahmadpour.formapp.ui.answerList.AnswerListActivity;
 import com.ahmadpour.formapp.ui.base.BaseActivity;
+import com.ahmadpour.formapp.ui.codeList.CodeListActivity;
 import com.ahmadpour.formapp.ui.formList.FormListActivity;
 
 import javax.inject.Inject;
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     protected void setUp() {
     }
+
     @Override
     public void openFormList() {
         startActivity(new Intent(this, FormListActivity.class));
@@ -55,6 +57,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         startActivity(new Intent(this, AnswerListActivity.class));
     }
 
+    @Override
+    public void openCodeList() {
+        startActivity(new Intent(this, CodeListActivity.class));
+    }
+
     @OnClick(R.id.btn_form_list)
     public void btnFormListClicked() {
         mPresenter.onFormListButtonClicked();
@@ -63,6 +70,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @OnClick(R.id.btn_answer_list)
     public void btnAnswerListClicked() {
         mPresenter.onAnswerListButtonClicked();
+    }
+
+    @OnClick(R.id.btn_code_list)
+    public void btnCodeListClicked() {
+        mPresenter.onCodeListButtonClicked();
     }
 
 }

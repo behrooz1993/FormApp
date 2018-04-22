@@ -4,8 +4,15 @@
     <string name="some_error">خطا</string>
     <string name="form_list">لیست فرم ها</string>
     <string name="answer_list">لیست پاسخ ها</string>
+    <string name="code_list">لیست کدهای پیگیری</string>
     <string name="submit_answers">ثبت پاسخ‌ها</string>
     <string name="save_form">ذخیره فرم</string>
     <string name="error_in_follow_code_generation">خطا در تولید کد پیگیری</string>
+    <string name="answer">پاسخ</string>
+    <string name="no_answer">بدون پاسخ</string>
+    <string name="export_csv">خروجی csv</string>
+    <string name="export_successful">خروجی با موفقیت ذخیره شد</string>
+    <string name="export_failed">خطا در خروجی گرفتن</string>
+    <string name="choose">انتخاب کنید</string>
 
 </resources>

@@ -5,6 +5,7 @@ import android.widget.Toast;
 import com.ahmadpour.formapp.R;
 import com.ahmadpour.formapp.data.DataManager;
 import com.ahmadpour.formapp.data.db.models.Answers;
+import com.ahmadpour.formapp.data.db.models.Codes;
 import com.ahmadpour.formapp.ui.base.BasePresenter;
 import com.ahmadpour.formapp.utils.rx.SchedulerProvider;
 import com.ahmadpour.formapp.utils.tools.Gzip;
@@ -31,12 +32,22 @@ public class AnswerPresenter<V extends AnswerMvpView> extends BasePresenter<V> i
     }
 
     @Override
-    public void fetchAnswers(long formId) {
-        getCompositeDisposable().add(getDataManager().getAnswers(formId)
+    public void fetchAnswers(long formId, String date) {
+        getCompositeDisposable().add(getDataManager().getAnswers(formId, date)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(answers -> {
                     getMvpView().fetchAnswers(answers);
+                }));
+    }
+
+    @Override
+    public void insertCode(Codes code) {
+        getCompositeDisposable().add(getDataManager().insertCode(code)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(aLong -> {
+
                 }));
     }
 

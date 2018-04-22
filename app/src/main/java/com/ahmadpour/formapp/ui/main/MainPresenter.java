@@ -37,6 +37,11 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     }
 
     @Override
+    public void onCodeListButtonClicked() {
+        getMvpView().openCodeList();
+    }
+
+    @Override
     public void deleteTempAnswers() {
         getCompositeDisposable().add(getDataManager().deleteTempAnswers()
                 .subscribeOn(getSchedulerProvider().io())

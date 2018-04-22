@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.ahmadpour.formapp.R;
 import com.ahmadpour.formapp.data.db.models.Codes;
@@ -16,8 +17,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class CodeListActivity extends BaseActivity implements CodeListMvpView{
+public class CodeListActivity extends BaseActivity implements CodeListMvpView {
 
     private CodeListAdapter mAdapter;
     private ArrayList<Codes> codes = new ArrayList<>();
@@ -52,5 +54,19 @@ public class CodeListActivity extends BaseActivity implements CodeListMvpView{
     public void onFetchCodes(List<Codes> codes) {
         this.codes.addAll(codes);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @OnClick(R.id.btn_export_csv)
+    public void btnExportClicked() {
+        mPresenter.btnExportClicked();
+    }
+
+    @Override
+    public void onExportCompleted(boolean success) {
+        if (success) {
+            Toast.makeText(this,getString(R.string.export_successful),Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this,getString(R.string.export_failed),Toast.LENGTH_SHORT).show();
+        }
     }
 }

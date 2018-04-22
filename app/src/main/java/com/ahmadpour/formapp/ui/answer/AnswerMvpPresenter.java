@@ -1,6 +1,7 @@
 package com.ahmadpour.formapp.ui.answer;
 
 import com.ahmadpour.formapp.data.db.models.Answers;
+import com.ahmadpour.formapp.data.db.models.Codes;
 import com.ahmadpour.formapp.ui.base.MvpPresenter;
 import com.ahmadpour.formapp.ui.base.MvpView;
 
@@ -11,7 +12,8 @@ import java.util.ArrayList;
  */
 public interface AnswerMvpPresenter<V extends AnswerMvpView> extends MvpPresenter<V> {
 
-    void fetchAnswers(long formId);
+    void fetchAnswers(long formId,String date);
+    void insertCode(Codes code);
     void onSubmitButtonClicked(ArrayList<Answers> answers);
 
 }

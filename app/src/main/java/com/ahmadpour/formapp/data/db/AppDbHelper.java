@@ -57,9 +57,12 @@ public class AppDbHelper implements DbHelper {
                 List<Questions> questions = mDaoSession.queryBuilder(Questions.class)
                         .where(QuestionsDao.Properties.FormId.eq(formId)).list();
                 for (Questions question : questions) {
-                    question.getOptions().addAll(mDaoSession.queryBuilder(Options.class)
-                            .where(OptionsDao.Properties.FormId.eq(1),
-                                    OptionsDao.Properties.QuestionId.eq(question.getId())).list());
+                    if (question.getOptions().size() == 0 && question.getType() == 2) {
+                        question.getOptions().addAll(mDaoSession.queryBuilder(Options.class)
+                                .where(OptionsDao.Properties.FormId.eq(1),
+                                        OptionsDao.Properties.QuestionId.eq(question.getId())).list());
+                        question.getOptions().add(0,new Options(0l,formId,question.getId(),"انتخاب کنید"));
+                    }
                 }
                 return mDaoSession.queryBuilder(Questions.class).where(QuestionsDao.Properties.FormId.eq(formId)).list();
             }
@@ -130,11 +133,13 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public Observable<List<Answers>> getAnswers(long formId) {
+    public Observable<List<Answers>> getAnswers(long formId,String date) {
         return Observable.fromCallable(new Callable<List<Answers>>() {
             @Override
             public List<Answers> call() throws Exception {
-                List<Answers> answers = mDaoSession.queryBuilder(Answers.class).where(AnswersDao.Properties.FormId.eq(formId)).list();
+                List<Answers> answers = mDaoSession.queryBuilder(Answers.class).where(
+                        AnswersDao.Properties.FormId.eq(formId),
+                        AnswersDao.Properties.Date.eq(date )).list();
                 for (Answers answer : answers) {
                     Questions question = mDaoSession.queryBuilder(Questions.class)
                             .where(QuestionsDao.Properties.Id.eq(answer.getQuestionId())).unique();
@@ -245,6 +250,17 @@ public class AppDbHelper implements DbHelper {
                     code.setForm(mDaoSession.queryBuilder(Forms.class).where(FormsDao.Properties.Id.eq(code.getFormId())).unique());
                 }
                 return codes;
+            }
+        });
+    }
+
+    @Override
+    public Observable<Cursor> getCodeTable() {
+        return Observable.fromCallable(new Callable<Cursor>() {
+            @Override
+            public Cursor call() throws Exception {
+                Cursor cursor = mDaoSession.getDatabase().rawQuery("Select * from codes",null);
+                return cursor;
             }
         });
     }

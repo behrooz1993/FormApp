@@ -1,6 +1,7 @@
 package com.ahmadpour.formapp.data;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.ahmadpour.formapp.data.db.DbHelper;
 import com.ahmadpour.formapp.data.db.models.Answers;
@@ -53,8 +54,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<List<Answers>> getAnswers(long formId) {
-        return mDbHelper.getAnswers(formId);
+    public Observable<List<Answers>> getAnswers(long formId,String date) {
+        return mDbHelper.getAnswers(formId,date);
     }
 
     @Override
@@ -103,7 +104,17 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<Long> insertCode(Codes code) {
+        return mDbHelper.insertCode(code);
+    }
+
+    @Override
     public Observable<List<Codes>> getCodes() {
         return mDbHelper.getCodes();
+    }
+
+    @Override
+    public Observable<Cursor> getCodeTable() {
+        return mDbHelper.getCodeTable();
     }
 }
